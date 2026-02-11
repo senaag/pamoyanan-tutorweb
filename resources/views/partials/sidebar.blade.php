@@ -5,7 +5,7 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/admin" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -24,7 +24,8 @@
                 <span class="hide-menu">Siswa</span>
               </a>
             </li>
-            <li class="sidebar-item">
+            @can('akses-admin')
+              <li class="sidebar-item">
               <a class="sidebar-link" href="./guru" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
@@ -32,6 +33,8 @@
                 <span class="hide-menu">Guru</span>
               </a>
             </li>
+            @endcan
+            
             <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
                 <span>

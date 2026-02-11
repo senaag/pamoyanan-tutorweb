@@ -13,14 +13,18 @@ class CekPeran
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $peranYangDiizinkan): Response
+    public function handle(Request $request, Closure $next, ...$daftarPeran): Response
     {
-        // Cek apakah pengguna sudah login dan memiliki peran yang sesuai
-        if (auth()->check() && auth()->user()->peran === $peranYangDiizinkan) {
-            return $next($request);
-        }
+        // Cek apakah user sudah login
+    if (!auth()->check()) {
+        return redirect('/login');
+    }
 
-        // Jika tidak punya akses, lempar ke halaman lain atau beri error 403
-        abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+    // Cek apakah peran user ada di dalam daftar yang diizinkan
+    if (in_array(auth()->user()->peran, $daftarPeran)) {
+        return $next($request);
+    }
+
+    abort(403, 'Anda tidak memiliki akses');
     }
 }
