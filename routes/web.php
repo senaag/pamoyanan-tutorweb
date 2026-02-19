@@ -45,4 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/siswa', function () {
         return view('admin.siswa');
     })->middleware('cek_peran:admin,guru');
+
+    Route::get('/siswa-create', function () {
+        return view('admin.siswa-create');
+    })->middleware('cek_peran:admin,guru');
 });
